@@ -7,6 +7,7 @@ import TaskList from "../components/TaskList";
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("tasks");
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const loadTasks = async () => {
     const res = await getTasks();
@@ -22,6 +23,8 @@ const Dashboard = () => {
       {/* Sidebar */}
       <div className="w-64 bg-slate-900 text-white p-6 hidden md:block">
         <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
+
+        <button onClick={() => setMenuOpen(!menuOpen)}>☰</button>
 
         <ul className="space-y-4 text-gray-300">
           <li
@@ -54,32 +57,30 @@ const Dashboard = () => {
       <div className="flex-1">
         <Navbar />
 
-        {/* Mobile Tabs */}
-        <div className="md:hidden flex justify-around bg-white shadow p-2">
-          <button
-            onClick={() => setActiveTab("tasks")}
-            className={`px-4 py-2 rounded ${
-              activeTab === "tasks" ? "bg-blue-600 text-white" : "text-gray-600"
-            }`}
-          >
-            My Tasks
-          </button>
+        {/* Mobile Tabs */}{/* Mobile Menu */}
+        {menuOpen && (
+          <div className="md:hidden bg-white shadow-md border-t">
+            <button
+              onClick={() => {
+                setActiveTab("tasks");
+                setMenuOpen(false);
+              }}
+              className="block w-full text-left px-6 py-3 hover:bg-gray-100"
+            >
+              My Tasks
+            </button>
 
-          <button
-            onClick={() => setActiveTab("create")}
-            className={`px-4 py-2 rounded ${
-              activeTab === "create"
-                ? "bg-blue-600 text-white"
-                : "text-gray-600"
-            }`}
-          >
-            Create Task
-          </button>
-        </div>
-
-
-
-        
+            <button
+              onClick={() => {
+                setActiveTab("create");
+                setMenuOpen(false);
+              }}
+              className="block w-full text-left px-6 py-3 hover:bg-gray-100"
+            >
+              Create Task
+            </button>
+          </div>
+        )}
 
         <div className="p-6">
           {activeTab === "tasks" && (
