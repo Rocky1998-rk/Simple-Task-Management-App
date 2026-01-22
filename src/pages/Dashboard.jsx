@@ -19,41 +19,67 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-
       {/* Sidebar */}
       <div className="w-64 bg-slate-900 text-white p-6 hidden md:block">
-        <h2 className="text-2xl font-bold mb-10 text-blue-400">
-          Task Manager
-        </h2>
+        <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
 
         <ul className="space-y-4 text-gray-300">
           <li
             onClick={() => setActiveTab("tasks")}
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "tasks" ? "bg-blue-600 text-white" : "hover:text-white"
+              activeTab === "tasks"
+                ? "bg-blue-600 text-white"
+                : "hover:text-white"
             }`}
           >
-             My Tasks
+            My Tasks
           </li>
 
           <li
             onClick={() => setActiveTab("create")}
             className={`cursor-pointer p-2 rounded ${
-              activeTab === "create" ? "bg-blue-600 text-white" : "hover:text-white"
+              activeTab === "create"
+                ? "bg-blue-600 text-white"
+                : "hover:text-white"
             }`}
           >
             Create New Task
           </li>
 
-          <li className="p-2 text-gray-500 cursor-not-allowed">
-            ⚙️ Settings
-          </li>
+          <li className="p-2 text-gray-500 cursor-not-allowed">⚙️ Settings</li>
         </ul>
       </div>
 
       {/* Main Content */}
       <div className="flex-1">
         <Navbar />
+
+        {/* Mobile Tabs */}
+        <div className="md:hidden flex justify-around bg-white shadow p-2">
+          <button
+            onClick={() => setActiveTab("tasks")}
+            className={`px-4 py-2 rounded ${
+              activeTab === "tasks" ? "bg-blue-600 text-white" : "text-gray-600"
+            }`}
+          >
+            My Tasks
+          </button>
+
+          <button
+            onClick={() => setActiveTab("create")}
+            className={`px-4 py-2 rounded ${
+              activeTab === "create"
+                ? "bg-blue-600 text-white"
+                : "text-gray-600"
+            }`}
+          >
+            Create Task
+          </button>
+        </div>
+
+
+
+        
 
         <div className="p-6">
           {activeTab === "tasks" && (
@@ -75,12 +101,8 @@ const Dashboard = () => {
           )}
         </div>
       </div>
-
     </div>
   );
 };
 
 export default Dashboard;
-
-
-
