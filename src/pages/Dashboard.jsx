@@ -91,6 +91,7 @@ import ProfileEdit from "../components/ProfileEdit";
 
 
 const Dashboard = () => {
+  console.log("Dashboard rendered");
   const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("tasks");
   const [menuOpen, setMenuOpen] = useState(false); // ✅ burger state
@@ -98,7 +99,7 @@ const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark",
   );
-  
+
   console.log("Dark Mode:", darkMode);
 
   const loadTasks = async () => {
