@@ -6,9 +6,8 @@ const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
 
   return (
-
     // <div className="w-full bg-white shadow-md px-6 py-4 flex justify-between items-center">
-      
+
     //   {/* Left - Logo */}
     //   <div className="flex items-center gap-3">
     //     <div className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center rounded-full font-bold">
@@ -44,12 +43,16 @@ const Navbar = () => {
         <p className="text-gray-600">
           Hi, <span className="font-semibold">{user?.name}</span>
         </p>
-        <Link to={'/login'}><button  onClick={logout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">
-          Logout
-        </button></Link>
+        <Link to={"/login"}>
+          <button
+            onClick={logout}
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded"
+          >
+            Logout
+          </button>
+        </Link>
       </div>
     </div>
-
   );
 };
 
