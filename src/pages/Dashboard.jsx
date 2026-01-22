@@ -24,7 +24,12 @@ const Dashboard = () => {
       <div className="w-64 bg-slate-900 text-white p-6 hidden md:block">
         <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
 
-        <button onClick={() => setMenuOpen(!menuOpen)}>☰</button>
+        {/* Mobile Header */}
+        <div className="md:hidden flex justify-between items-center bg-white shadow p-4">
+          <h2 className="text-lg font-bold">Task Manager</h2>
+
+          <button onClick={() => setMenuOpen(!menuOpen)}>☰</button>
+        </div>
 
         <ul className="space-y-4 text-gray-300">
           <li
@@ -57,7 +62,8 @@ const Dashboard = () => {
       <div className="flex-1">
         <Navbar />
 
-        {/* Mobile Tabs */}{/* Mobile Menu */}
+        {/* Mobile Tabs */}
+        {/* Mobile Menu */}
         {menuOpen && (
           <div className="md:hidden bg-white shadow-md border-t">
             <button
