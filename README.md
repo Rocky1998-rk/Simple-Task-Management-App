@@ -1,16 +1,32 @@
-# React + Vite
+# Simple Task Management App – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend of the **Simple Task Management Application** built using **React.js**.  
+It allows users to register, login, and manage their daily tasks with a clean and interactive UI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- User Signup & Login
+- JWT based Authentication
+- Add, Edit, Delete Tasks
+- Mark tasks as completed
+- Secure API integration with backend
+- Responsive UI
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js  
+- Axios  
+- React Router  
+- Context API  
+- Tailwind CSS  
+- Vite  
+
+---
+
+## 📂 Folder Structure
+
+<img width="1920" height="1200" alt="Screenshot 2026-01-14 172700" src="https://github.com/user-attachments/assets/6aaa01f6-e90f-46ed-ba5a-11a353fb0e3e" />
