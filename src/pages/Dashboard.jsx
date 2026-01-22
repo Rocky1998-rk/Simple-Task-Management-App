@@ -105,8 +105,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
+
       {/* Sidebar (Desktop only) */}
-      <div className="w-64 bg-slate-900 text-white p-6 hidden md:block">
+      <div className="w-60 bg-slate-900 text-white p-6 hidden md:block">
         <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
 
         <ul className="space-y-4 text-gray-300">
