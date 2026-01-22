@@ -80,16 +80,18 @@
 
 // export default Dashboard;
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getTasks } from "../api/taskApi";
 import Navbar from "../components/Navbar";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
+import { AuthContext } from "../context/AuthContext";
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("tasks");
   const [menuOpen, setMenuOpen] = useState(false); // ✅ burger state
+  const { user } = useContext(AuthContext);
 
   const loadTasks = async () => {
     const res = await getTasks();
@@ -140,7 +142,7 @@ const Dashboard = () => {
           <h2 className="text-lg font-bold text-blue-600">Task Manager</h2>
 
           {/* Left: User Name */}
-          <p className="text-gray-700 font-semibold ml-1">Hi, Rocky</p>
+          <p className="text-gray-700 font-semibold ml-1">{user?.name}</p>
 
           {/* Right: Logout + Hamburger */}
           <div className="flex items-center gap-3">
