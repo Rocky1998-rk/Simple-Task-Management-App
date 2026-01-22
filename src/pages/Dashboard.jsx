@@ -98,6 +98,8 @@ const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark",
   );
+  
+  console.log("Dark Mode:", darkMode);
 
   const loadTasks = async () => {
     const res = await getTasks();
@@ -249,6 +251,7 @@ const Dashboard = () => {
                     }`}
                   >
                     {darkMode ? "ON" : "OFF"}
+                  
                   </button>
                 </div>
 
