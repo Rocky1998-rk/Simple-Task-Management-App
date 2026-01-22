@@ -86,12 +86,13 @@ import Navbar from "../components/Navbar";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("tasks");
   const [menuOpen, setMenuOpen] = useState(false); // ✅ burger state
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const loadTasks = async () => {
     const res = await getTasks();
@@ -137,7 +138,7 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1">
-        
+
         {/* Mobile Header with Burger */}
         <div className="md:hidden flex justify-between items-center bg-white shadow px-4 py-3">
           <h2 className="text-lg font-bold text-blue-600">Task Manager</h2>
@@ -146,7 +147,7 @@ const Dashboard = () => {
           {/* Right: Logout + Hamburger */}
           <div className="flex items-center gap-3">
              <p className="text-gray-600">Hi, <span className="font-semibold">{user?.name}</span></p>
-            <button className="bg-red-500 text-white px-3 py-1 rounded text-sm">Logout</button>
+            <Link to={'/login'}><button onClick={logout} className="bg-red-500 text-white px-3 py-1 rounded text-sm">Logout</button></Link>
            <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">☰</button>
           </div>
         </div>
