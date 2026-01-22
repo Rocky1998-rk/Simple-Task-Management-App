@@ -166,6 +166,9 @@ const Dashboard = () => {
         <div className="md:hidden flex justify-between items-center bg-white shadow px-4 py-3">
           <h2 className="text-lg font-bold text-blue-600">Task Manager</h2>
 
+          <h1 className="text-black dark:text-white">DARK MODE TEST</h1>
+
+
           {/* Right: Logout + Hamburger */}
           <div className="flex items-center gap-3">
             <p className="text-gray-600">
