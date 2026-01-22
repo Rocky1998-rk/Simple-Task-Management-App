@@ -137,18 +137,16 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1">
+        
         {/* Mobile Header with Burger */}
         <div className="md:hidden flex justify-between items-center bg-white shadow px-4 py-3">
           <h2 className="text-lg font-bold text-blue-600">Task Manager</h2>
 
-          {/* Left: User Name */}
-          <p className="text-gray-700 font-semibold ml-1">{user?.name}</p>
-
+      
           {/* Right: Logout + Hamburger */}
           <div className="flex items-center gap-3">
-            <button className="bg-red-500 text-white px-3 py-1 rounded text-sm">
-              Logout
-            </button>
+             <p className="text-gray-600">Hi, <span className="font-semibold">{user?.name}</span></p>
+            <button className="bg-red-500 text-white px-3 py-1 rounded text-sm">Logout</button>
            <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">☰</button>
           </div>
         </div>
