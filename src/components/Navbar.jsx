@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -43,9 +44,9 @@ const Navbar = () => {
         <p className="text-gray-600">
           Hi, <span className="font-semibold">{user?.name}</span>
         </p>
-        <button  onClick={logout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">
+        <Link to={'/login'}><button  onClick={logout} className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded">
           Logout
-        </button>
+        </button></Link>
       </div>
     </div>
 
