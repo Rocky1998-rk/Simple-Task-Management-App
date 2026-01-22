@@ -20,17 +20,10 @@ function App() {
       />
     <BrowserRouter>
       <Routes>
-        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<Login />} />
-
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard/> </ProtectedRoute> }/>
       </Routes>
     </BrowserRouter>
     </>
