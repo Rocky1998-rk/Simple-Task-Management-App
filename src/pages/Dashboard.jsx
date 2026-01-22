@@ -80,8 +80,6 @@
 
 // export default Dashboard;
 
-
-
 import { useEffect, useState } from "react";
 import { getTasks } from "../api/taskApi";
 import Navbar from "../components/Navbar";
@@ -104,12 +102,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-
       {/* Sidebar (Desktop only) */}
       <div className="w-64 bg-slate-900 text-white p-6 hidden md:block">
-        <h2 className="text-2xl font-bold mb-10 text-blue-400">
-          Task Manager
-        </h2>
+        <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
 
         <ul className="space-y-4 text-gray-300">
           <li
@@ -134,25 +129,26 @@ const Dashboard = () => {
             Create New Task
           </li>
 
-          <li className="p-2 text-gray-500 cursor-not-allowed">
-            ⚙️ Settings
-          </li>
+          <li className="p-2 text-gray-500 cursor-not-allowed">⚙️ Settings</li>
         </ul>
       </div>
 
       {/* Main Content */}
       <div className="flex-1">
-
         {/* Mobile Header with Burger */}
         <div className="md:hidden flex justify-between items-center bg-white shadow px-4 py-3">
           <h2 className="text-lg font-bold text-blue-600">Task Manager</h2>
 
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-2xl"
-          >
-            ☰
-          </button>
+          {/* Left: User Name */}
+          <p className="text-gray-700 font-semibold ml-1">Hi, Rocky</p>
+
+          {/* Right: Logout + Hamburger */}
+          <div className="flex items-center gap-3">
+            <button className="bg-red-500 text-white px-3 py-1 rounded text-sm">
+              Logout
+            </button>
+           <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">☰</button>
+          </div>
         </div>
 
         {/* Mobile Burger Menu */}
