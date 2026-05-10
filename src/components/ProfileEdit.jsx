@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const ProfileEdit = ({ user }) => {
   const [name, setName] = useState(user?.name || "");
-  const [email, setEmail] = useState(user?.email || "");
+  const [email] = useState(user?.email || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,7 +18,7 @@ const ProfileEdit = ({ user }) => {
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full px-3 py-2 border rounded dark:bg-gray-700"
+          className="w-full rounded border border-slate-300 bg-white px-3 py-2 text-slate-900 transition-colors duration-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100"
         />
       </div>
 
@@ -27,11 +27,11 @@ const ProfileEdit = ({ user }) => {
         <input
           value={email}
           disabled
-          className="w-full px-3 py-2 border rounded bg-gray-100 dark:bg-gray-600 cursor-not-allowed"
+          className="w-full cursor-not-allowed rounded border border-slate-300 bg-slate-100 px-3 py-2 text-slate-500 transition-colors duration-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400"
         />
       </div>
 
-      <button className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button className="rounded bg-blue-600 px-4 py-2 text-white">
         Save Changes
       </button>
     </form>

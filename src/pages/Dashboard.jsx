@@ -1,106 +1,19 @@
-// import { useEffect, useState } from "react";
-// import { getTasks } from "../api/taskApi";
-// import Navbar from "../components/Navbar";
-// import TaskForm from "../components/TaskForm";
-// import TaskList from "../components/TaskList";
-
-// const Dashboard = () => {
-//   const [tasks, setTasks] = useState([]);
-//   const [activeTab, setActiveTab] = useState("tasks");
-
-//   const loadTasks = async () => {
-//     const res = await getTasks();
-//     setTasks(res.data.tasks);
-//   };
-
-//   useEffect(() => {
-//     loadTasks();
-//   }, []);
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 flex">
-//       {/* Sidebar */}
-//       <div className="w-64 bg-slate-900 text-white p-6 hidden md:block">
-//         <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
-
-//         <ul className="space-y-4 text-gray-300">
-//           <li
-//             onClick={() => setActiveTab("tasks")}
-//             className={`cursor-pointer p-2 rounded ${
-//               activeTab === "tasks"
-//                 ? "bg-blue-600 text-white"
-//                 : "hover:text-white"
-//             }`}
-//           >
-//             My Tasks
-//           </li>
-
-//           <li
-//             onClick={() => setActiveTab("create")}
-//             className={`cursor-pointer p-2 rounded ${
-//               activeTab === "create"
-//                 ? "bg-blue-600 text-white"
-//                 : "hover:text-white"
-//             }`}
-//           >
-//             Create New Task
-//           </li>
-
-//           <li className="p-2 text-gray-500 cursor-not-allowed">⚙️ Settings</li>
-//         </ul>
-//       </div>
-
-//       {/* Main Content */}
-//       <div className="flex-1">
-//         <Navbar />
-
-//         <div className="p-6">
-//           {activeTab === "tasks" && (
-//             <>
-//               <h2 className="text-2xl font-bold mb-4">My Tasks</h2>
-//               <div className="bg-white rounded-xl shadow p-6">
-//                 <TaskList tasks={tasks} refresh={loadTasks} />
-//               </div>
-//             </>
-//           )}
-
-//           {activeTab === "create" && (
-//             <>
-//               <h2 className="text-2xl font-bold mb-4">Create New Task</h2>
-//               <div className="bg-white rounded-xl shadow p-6">
-//                 <TaskForm refresh={loadTasks} />
-//               </div>
-//             </>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { getTasks } from "../api/taskApi";
 import Navbar from "../components/Navbar";
 import TaskForm from "../components/TaskForm";
 import TaskList from "../components/TaskList";
-import { AuthContext } from "../context/AuthContext";
-import { Link } from "react-router-dom";
 import ProfileEdit from "../components/ProfileEdit";
-
+import { AuthContext } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Dashboard = () => {
-  console.log("Dashboard rendered");
   const [tasks, setTasks] = useState([]);
   const [activeTab, setActiveTab] = useState("tasks");
-  const [menuOpen, setMenuOpen] = useState(false); // ✅ burger state
+  const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
-  const [darkMode, setDarkMode] = useState(
-    localStorage.getItem("theme") === "dark",
-  );
-
-  console.log("Dark Mode:", darkMode);
+  const { isDark, toggleTheme } = useTheme();
 
   const loadTasks = async () => {
     const res = await getTasks();
@@ -111,26 +24,15 @@ const Dashboard = () => {
     loadTasks();
   }, []);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [darkMode]);
-
   return (
-    <div className="min-h-screen flex bg-gray-100 dark:bg-gray-900 dark:text-white">
-      {/* Sidebar (Desktop only) */}
-      <div className="w-60 bg-slate-900 text-white p-6 hidden md:block">
-        <h2 className="text-2xl font-bold mb-10 text-blue-400">Task Manager</h2>
+    <div className="min-h-screen bg-slate-100 text-slate-900 transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100 md:flex">
+      <div className="hidden w-60 bg-slate-900 p-6 text-white md:block">
+        <h2 className="mb-10 text-2xl font-bold text-blue-400">Task Manager</h2>
 
-        <ul className="space-y-4 text-gray-300">
+        <ul className="space-y-4 text-slate-300">
           <li
             onClick={() => setActiveTab("tasks")}
-            className={`cursor-pointer p-2 rounded ${
+            className={`cursor-pointer rounded p-2 ${
               activeTab === "tasks"
                 ? "bg-blue-600 text-white"
                 : "hover:text-white"
@@ -141,7 +43,7 @@ const Dashboard = () => {
 
           <li
             onClick={() => setActiveTab("create")}
-            className={`cursor-pointer p-2 rounded ${
+            className={`cursor-pointer rounded p-2 ${
               activeTab === "create"
                 ? "bg-blue-600 text-white"
                 : "hover:text-white"
@@ -152,52 +54,51 @@ const Dashboard = () => {
 
           <li
             onClick={() => setActiveTab("settings")}
-            className={`cursor-pointer p-2 rounded ${
+            className={`cursor-pointer rounded p-2 ${
               activeTab === "settings"
                 ? "bg-blue-600 text-white"
                 : "hover:text-white"
             }`}
           >
-            ⚙️ Settings
+            Settings
           </li>
         </ul>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1">
-        {/* Mobile Header with Burger */}
-        <div className="md:hidden flex justify-between items-center bg-white shadow px-4 py-3">
+        <div className="flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 shadow-sm transition-colors duration-200 dark:border-slate-800 dark:bg-slate-900 md:hidden">
           <h2 className="text-lg font-bold text-blue-600">Task Manager</h2>
 
-          
-          {/* Right: Logout + Hamburger */}
           <div className="flex items-center gap-3">
-            <p className="text-gray-600">
+            <p className="text-sm text-slate-600 dark:text-slate-300">
               Hi, <span className="font-semibold">{user?.name}</span>
             </p>
-            <Link to={"/login"}>
+            <Link to="/login">
               <button
                 onClick={logout}
-                className="bg-red-500 text-white px-3 py-1 rounded text-sm"
+                className="rounded bg-red-500 px-3 py-1 text-sm text-white"
               >
                 Logout
               </button>
             </Link>
-            <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">
-              ☰
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              type="button"
+              className="text-2xl text-slate-700 dark:text-slate-100"
+            >
+              Menu
             </button>
           </div>
         </div>
 
-        {/* Mobile Burger Menu */}
         {menuOpen && (
-          <div className="md:hidden bg-white shadow border-b">
+          <div className="border-b border-slate-200 bg-white shadow dark:border-slate-800 dark:bg-slate-900 md:hidden">
             <button
               onClick={() => {
                 setActiveTab("tasks");
                 setMenuOpen(false);
               }}
-              className="block w-full text-left px-6 py-3 hover:bg-gray-100"
+              className="block w-full px-6 py-3 text-left hover:bg-slate-100 dark:hover:bg-slate-800"
             >
               My Tasks
             </button>
@@ -207,9 +108,19 @@ const Dashboard = () => {
                 setActiveTab("create");
                 setMenuOpen(false);
               }}
-              className="block w-full text-left px-6 py-3 hover:bg-gray-100"
+              className="block w-full px-6 py-3 text-left hover:bg-slate-100 dark:hover:bg-slate-800"
             >
               Create New Task
+            </button>
+
+            <button
+              onClick={() => {
+                setActiveTab("settings");
+                setMenuOpen(false);
+              }}
+              className="block w-full px-6 py-3 text-left hover:bg-slate-100 dark:hover:bg-slate-800"
+            >
+              Settings
             </button>
           </div>
         )}
@@ -219,19 +130,17 @@ const Dashboard = () => {
         <div className="p-6">
           {activeTab === "tasks" && (
             <>
-              <h2 className="text-2xl font-bold mb-4">My Tasks</h2>
-              <div className="bg-white rounded-xl shadow p-6">
+              <h2 className="mb-4 text-2xl font-bold">My Tasks</h2>
+              <div className="rounded-xl bg-white p-6 shadow transition-colors duration-200 dark:bg-slate-900">
                 <TaskList tasks={tasks} refresh={loadTasks} />
               </div>
             </>
           )}
 
-          <h1 className="text-black dark:text-white">DARK MODE TEST</h1>
-
           {activeTab === "create" && (
             <>
-              <h2 className="text-2xl font-bold mb-4">Create New Task</h2>
-              <div className="bg-white rounded-xl shadow p-6">
+              <h2 className="mb-4 text-2xl font-bold">Create New Task</h2>
+              <div className="rounded-xl bg-white p-6 shadow transition-colors duration-200 dark:bg-slate-900">
                 <TaskForm refresh={loadTasks} />
               </div>
             </>
@@ -239,24 +148,22 @@ const Dashboard = () => {
 
           {activeTab === "settings" && (
             <>
-              <h2 className="text-2xl font-bold mb-4">Settings</h2>
+              <h2 className="mb-4 text-2xl font-bold">Settings</h2>
 
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow p-6 space-y-6">
-                {/* 🌙 Dark Mode Toggle */}
-                <div className="flex justify-between items-center">
+              <div className="space-y-6 rounded-xl bg-white p-6 shadow transition-colors duration-200 dark:bg-slate-900">
+                <div className="flex items-center justify-between">
                   <p className="font-semibold">Dark Mode</p>
                   <button
-                    onClick={() => setDarkMode(!darkMode)}
-                    className={`px-4 py-1 rounded ${
-                      darkMode ? "bg-green-600" : "bg-gray-400"
+                    onClick={toggleTheme}
+                    type="button"
+                    className={`rounded px-4 py-1 text-white ${
+                      isDark ? "bg-green-600" : "bg-slate-500"
                     }`}
                   >
-                    {darkMode ? "ON" : "OFF"}
-                  
+                    {isDark ? "ON" : "OFF"}
                   </button>
                 </div>
 
-                {/* 👤 Profile Edit */}
                 <ProfileEdit user={user} />
               </div>
             </>
